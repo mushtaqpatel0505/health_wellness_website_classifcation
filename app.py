@@ -33,7 +33,7 @@ def run_crewai_process(df, selected_model, api_key):
 
         # Filter out null website values and remove duplicates
     df = df.dropna(subset=['website']).drop_duplicates(subset=['website'], keep='first')
-    df = df.head()
+    #df = df.head()
 
     url_list = df['website'].tolist()
     for i in range(0,len(url_list), 5):
