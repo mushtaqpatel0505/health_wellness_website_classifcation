@@ -1,0 +1,88 @@
+---
+scrape_website_content_task:
+  description: 'Scrape the main content of each website from the provided URLs: {url_list}.
+    Ensure to focus only on primary content and avoid peripheral pages.if unable to find or scrape any website then return false for it'
+  expected_output: A collection of main content from the websites scraped, ready for
+    analysis against health and wellness criteria.if unable to find or scrape any website then return false for it
+  async_execution: false
+  agent: website_content_scraper
+evaluate_content_for_health_and_wellness_task:
+  description: Analyze the scraped content to determine if it meets the Health and
+    Wellness criteria. Check for direct health services, environmental health products,and wellness-related content. 
+    HEALTH AND WELLNESS CRITERIA
+    website should be categorized as Health and Wellness if it primarily focuses on
+    1.Direct Health Services & Products
+    - Medical information/services
+    - Physical health/fitness
+    - Mental health/wellness
+    - Nutrition/diet
+    - Alternative medicine
+    - Healthcare services
+    2. Environmental Health Products
+    - Air purification systems/products
+    - Water filtration/purification
+    - Indoor air quality solutions
+    - Environmental health monitoring
+    - Clean water solutions
+    3. Wellness Products & Equipment
+    - Personal care products
+    - Fitness equipment
+    - Wellness devices
+    - Health monitoring tools
+    - Sleep improvement products
+    4. Health-Supporting Categories
+    - Natural/organic cleaning products
+    - Non-toxic home products
+    - Allergen reduction solutions
+    - EMF protection products
+    - Wellness technology
+    5. Wellness Services & Education
+    - Health education/coaching
+    - Wellness lifestyle content
+    - Environmental health consulting
+    - Health assessment services
+    - Wellness program providers
+    6. Specialty Health Categories
+    - Clean living solutions
+    - Toxin-free products
+    - Respiratory health products
+    - Immune system support
+    - Environmental wellness
+    PRODUCT CLASSIFICATION RULES
+    1. If a product/service directly impacts
+    - Air quality
+    - Water quality
+    - Personal wellness
+    - Physical health
+    Then categorize as Health and Wellness 
+    2. Consider as Health and Wellness if the product
+    - Improves living conditions that affect health
+    - Reduces health risks or hazards
+    - Enhances environmental wellness
+    - Supports healthy living practices
+    - Prevents health issues
+  expected_output: |
+    Three lists:
+      1. websites: A list of website URLs (str) corresponding to {url_list}
+      2. health_wellness: A list of boolean values indicating if the website is categorized as Health & Wellness (True/False)
+      3. reasons: A list of strings explaining the classification decision for each website
+
+    Example:
+    websites = ["https://example.com", "https://technews.com"]
+    health_wellness = [True, False]
+    reasons = ["Contains fitness guides and nutrition plans.", "Focuses on general technology topics."]
+
+    Note: The results should maintain the same order as the provided {url_list}
+  agent: health_and_wellness_content_evaluator
+  context:
+  - scrape_website_content_task
+# generate_final_boolean_list_task:
+#   description: Generate a final output list of Boolean values based on the analysis
+#     of health and wellness categorization from the scraped content, ensuring no blank
+#     or null values.
+#   expected_output: A list of Boolean values indicating the health and wellness categorization
+#     of each website, ensuring no blank or null values.
+#   async_execution: false
+#   agent: health_and_wellness_content_evaluator
+#   context:
+#   - evaluate_content_for_health_and_wellness_task
