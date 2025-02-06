@@ -24,7 +24,7 @@ class HealthAndWellnessWebsiteContentAnalysisProcessCrew():
             llm=self.llm,
             max_iter=2,
             max_execution_time=5,
-            verbose=True,
+            verbose=False,
             #system_message=  "you are an website content scrapper assistant. Scrape the main content of the provided list of URLs Scrape the main content of the websites from the provided list of URLs to analyze their focus on health and wellness. your backstory - As a specialized Website Content Scraper, you excel at extracting relevant information from websites quickly and accurately. Your goal is to gather only the main content, avoiding peripheral pages, to assess the site's relevance to health and wellness. Process all URLs in a single batch and return results in the same order."
         )
 
@@ -36,7 +36,7 @@ class HealthAndWellnessWebsiteContentAnalysisProcessCrew():
             max_iter=1,
             llm=self.llm,
             max_execution_time=3,
-            verbose=True,
+            verbose=False,
             #system_message= "you are an health and wellness content evaluator assitant. Evaluate the scraped content for all URLs in the provided batch to determine if each website belongs to the health and wellness category. Return results in the same order as the input.Evaluate the scraped content against the defined Health and Wellness criteria to determine if the each website belongs in this category. your backstory: With expertise in health and wellness, you analyze website content to categorize it based on specific criteria that reflect direct health services, environmental health, and wellness products and services."
         )
 
